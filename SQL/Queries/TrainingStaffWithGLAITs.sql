@@ -1,0 +1,16 @@
+SELECT
+    SATELLITE2.*,
+    SDTGLAIT.GLAIT,
+    IIf(
+IsNull([SEPARATION]),
+Date(),
+        [SEPARATION]
+    )AS CurrentDate
+
+FROM
+    SATELLITE2
+    LEFT JOIN SDTGLAIT
+        ON SATELLITE2.[EMP ID] = SDTGLAIT.EMPID
+
+WHERE
+    (((SDTGLAIT.GLAIT) Is Not Null) AND ((IIf(IsNull([SEPARATION]),Date(),[SEPARATION]))>#12/31/2020#) );

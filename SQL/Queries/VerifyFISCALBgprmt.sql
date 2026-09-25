@@ -1,0 +1,2 @@
+WHERE
+    (((VERIFY.VERID)=28));
