@@ -1,0 +1,1 @@
+-- Access Query: TrainingCompImport P1 -- Type: SAVED QUERY UPDATE SDTCOURSECHECK SET SDTCOURSECHECK.YearComp = [YearComp1];

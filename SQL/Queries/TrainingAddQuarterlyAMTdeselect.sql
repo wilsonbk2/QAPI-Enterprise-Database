@@ -1,0 +1,1 @@
+-- Access Query: TrainingAddQuarterlyAMTdeselect -- Type: SAVED QUERY UPDATE SDTCOURSE SET SDTCOURSE.IsSelected = No;

@@ -1,0 +1,1 @@
+-- Access Query: TrainingCompDupsDate P3 -- Type: SAVED QUERY UPDATE DISTINCTROW SDTCOURSECOMP INNER JOIN [TrainingCompDupsDate P2] ON SDTCOURSECOMP.CCCID = [TrainingCompDupsDate P2].MaxOfCCCID SET SDTCOURSECOMP.Duplicate = "Duplicate";

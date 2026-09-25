@@ -1,0 +1,1 @@
+-- Access Query: TrainingCompDups P4 -- Type: SAVED QUERY UPDATE DISTINCTROW SDTCOURSECOMP INNER JOIN [TrainingCompDups P3] ON SDTCOURSECOMP.CCCID = [TrainingCompDups P3].CCCID SET SDTCOURSECOMP.Duplicate = "Duplicate";
