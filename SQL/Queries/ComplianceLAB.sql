@@ -1,0 +1,13 @@
+SELECT
+First(DATETABLE.Month) AS FirstOfMonth,
+    DATETABLE.Year,
+    LAB.QMDATE
+
+FROM
+    LAB
+    LEFT JOIN DATETABLE
+        ON LAB.QMDATE = DATETABLE.Date
+
+GROUP BY
+    DATETABLE.Year
+    LAB.QMDATE;

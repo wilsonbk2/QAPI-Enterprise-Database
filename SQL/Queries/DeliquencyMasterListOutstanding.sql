@@ -1,0 +1,40 @@
+SELECT
+    DEQDELINQUENCY.DEQKEY,
+    DEQPATIENT.PatientID,
+    DEQPATIENT.EPI,
+    [LNAME] & ", " & [FNAME] & " " & [DEQPATIENT].[MI] & "." AS [Full Name],
+    DEQDELINQUENCY.DID,
+    DEQDELINQUENCY.DMID,
+    DEQDELINQUENCY.DEQID,
+    DEQDELINQUENCY.DEFID,
+    DEQDELINQUENCY.EDATE,
+    DEQDELINQUENCY.EMPID,
+    ([EDATE]-Date())*(-1) AS [Days Deq Calq],
+    UNIT.UNITSUB,
+    UNIT.UNITMAIN,
+    BUILDING.[BUILDING#],
+    DEQRESOLUTION.RDATE,
+    IIf(
+IsNull([STATUS]),
+        "Outstanding",
+        "Resolved"
+    )AS Reso,
+    SATELLITE2.[SUPV#],
+    [DEQDELINQUENCY].[PatientID] & "-" & [Episode] AS patepi,
+    IIf(
+        [Reso]="Resolved",
+        "Resolved",
+        [Days Deq Calq]
+    )AS [Days Deq]
+
+FROM
+    (DEQRESOLUTION RIGHT JOIN (BUILDING RIGHT JOIN (UNIT RIGHT JOIN (DEQPATIENT RIGHT JOIN DEQDELINQUENCY ON (DEQPATIENT.EPI = DEQDELINQUENCY.Episode) AND (DEQPATIENT.PatientID = DEQDELINQUENCY.PatientID)) ON UNIT.UNITSUB = DEQPATIENT.UNIT) ON BUILDING.BUI = UNIT.BUI) ON DEQRESOLUTION.DEQKEY = DEQDELINQUENCY.DEQKEY)
+    LEFT JOIN SATELLITE2
+        ON DEQDELINQUENCY.EMPID = SATELLITE2.[EMP ID]
+
+WHERE
+    ((( IIf(
+IsNull([STATUS]),
+        "Outstanding",
+        "Resolved"
+    ) )="outstanding"));
